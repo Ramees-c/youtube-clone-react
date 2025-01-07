@@ -1,9 +1,12 @@
 import React from 'react'
 import "./Home.css"
+import Sidebar from '../../components/Sidebar/Sidebar'
 
-function Home() {
+function Home({sidebar}) {
   return (
-    <div>Home</div>
+    <>
+    <Sidebar sidebar={sidebar} />
+    </>
   )
 }
 
