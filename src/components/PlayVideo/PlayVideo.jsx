@@ -13,8 +13,12 @@ import axios from "axios";
 
 import { value_converter } from "../../Data";
 import moment from "moment";
+import { useParams } from "react-router-dom";
 
-function PlayVideo({ videoId, categoryId }) {
+function PlayVideo() {
+
+  const {videoId} = useParams()
+
   const [apiData, setApiData] = useState(null);
   const [channelData, setChannelData] = useState(null);
   const [commentData, setCommentData] = useState([]);
@@ -31,7 +35,7 @@ function PlayVideo({ videoId, categoryId }) {
       }
     };
     fetchData();
-  }, []);
+  }, [videoId]);
 
   useEffect(() => {
     const fetchChannelData = async () => {
