@@ -16,8 +16,7 @@ import moment from "moment";
 import { useParams } from "react-router-dom";
 
 function PlayVideo() {
-
-  const {videoId} = useParams()
+  const { videoId } = useParams();
 
   const [apiData, setApiData] = useState(null);
   const [channelData, setChannelData] = useState(null);
@@ -58,7 +57,7 @@ function PlayVideo() {
       try {
         const comment_url = `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=50&videoId=${videoId}&key=${API_KEY}`;
         const response = await axios.get(comment_url);
-        // console.log(response.data.items, "comment") 
+        // console.log(response.data.items, "comment")
         setCommentData(response.data.items);
       } catch (error) {
         console.error(error.message);
@@ -131,24 +130,33 @@ function PlayVideo() {
           Comments
         </h4>
         {commentData?.map((comment, index) => {
-            return (
-                <div className="comment" key={index}>
-          <img src={comment.snippet?.topLevelComment?.snippet?.authorProfileImageUrl} alt="" />
-          <div>
-            <h3>
-              {comment.snippet.topLevelComment.snippet.authorDisplayName} <span>1 day ago</span>
-            </h3>
-            <p>
-              {comment.snippet.topLevelComment.snippet.textDisplay}
-            </p>
-            <div className="comment-action">
-              <img src={like} alt="" />
-              <span>{value_converter(comment.snippet.topLevelComment.snippet.likeCount)}</span>
-              <img src={dislike} alt="" />
+          return (
+            <div className="comment" key={index}>
+              <img
+                src={
+                  comment.snippet?.topLevelComment?.snippet
+                    ?.authorProfileImageUrl
+                }
+                alt=""
+              />
+              <div>
+                <h3>
+                  {comment.snippet.topLevelComment.snippet.authorDisplayName}{" "}
+                  <span>1 day ago</span>
+                </h3>
+                <p>{comment.snippet.topLevelComment.snippet.textDisplay}</p>
+                <div className="comment-action">
+                  <img src={like} alt="" />
+                  <span>
+                    {value_converter(
+                      comment.snippet.topLevelComment.snippet.likeCount
+                    )}
+                  </span>
+                  <img src={dislike} alt="" />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-            )
+          );
         })}
       </div>
     </div>

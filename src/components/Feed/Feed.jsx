@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Feed.css";
 
-import thambnail1 from "../../assets/thumbnail1.png";
-import thambnail2 from "../../assets/thumbnail2.png";
-import thambnail3 from "../../assets/thumbnail3.png";
-import thambnail4 from "../../assets/thumbnail4.png";
-import thambnail5 from "../../assets/thumbnail5.png";
-import thambnail6 from "../../assets/thumbnail6.png";
-import thambnail7 from "../../assets/thumbnail7.png";
-import thambnail8 from "../../assets/thumbnail8.png";
 import { Link } from "react-router-dom";
 import { API_KEY } from "../../Api/Api";
 import axios from "axios";
@@ -26,7 +18,7 @@ function Feed({ category }) {
         // console.log(response.data.items, "itemss");
         setData(response.data.items);
       } catch (error) {
-         console.error(error.message)
+        console.error(error.message);
       }
     };
     fetchData();
@@ -36,15 +28,20 @@ function Feed({ category }) {
     <div className="feed">
       {data.map((item, index) => {
         return (
-          <Link to={`video/${item.snippet.categoryId}/${item.id}`} key={index} className="card">
-        <img src={item.snippet.thumbnails.medium.url} alt="" />
-        <h2>
-          {item.snippet.title}
-        </h2>
-        <h3>{item.snippet.channelTitle}</h3>
-        <p>{value_converter(item.statistics.viewCount)} views &bull; {moment(item.snippet.publishedAt).fromNow()}</p>
-      </Link>
-        )
+          <Link
+            to={`video/${item.snippet.categoryId}/${item.id}`}
+            key={index}
+            className="card"
+          >
+            <img src={item.snippet.thumbnails.medium.url} alt="" />
+            <h2>{item.snippet.title}</h2>
+            <h3>{item.snippet.channelTitle}</h3>
+            <p>
+              {value_converter(item.statistics.viewCount)} views &bull;{" "}
+              {moment(item.snippet.publishedAt).fromNow()}
+            </p>
+          </Link>
+        );
       })}
     </div>
   );
